@@ -1,6 +1,15 @@
 # AI 文档写作规范技能
 
-一组约束 AI 编程助手撰写与修改文档行为的技能（skills），适用于支持 `.agents/skills` 发现机制的 Agent 工具（如 ZCode）。每条规则都来自真实使用中反复出现的坏习惯，而不是理论上的最佳实践。
+一组约束 AI 编程助手撰写与修改文档行为的技能（skills），遵循 Agent Skills 开放规范（每个技能一个目录，含 `SKILL.md` 与 YAML frontmatter）。凡支持该规范的 Agent 工具均可使用，例如：
+
+- **ZCode**：项目级 `.agents/skills/`，用户级 `~/.agents/skills/`
+- **Claude Code**：项目级 `.claude/skills/`，用户级 `~/.claude/skills/`
+- **OpenAI Codex CLI**：`~/.codex/skills/`
+- **Cursor**、**OpenCode**、**Gemini CLI**、**GitHub Copilot**（agent mode）等也已支持 SKILL.md 格式，目录略有差异
+
+各工具的技能目录不同，但 SKILL.md 格式通用：把技能文件夹复制到对应目录即可。
+
+每条规则都来自真实使用中反复出现的坏习惯，而不是理论上的最佳实践。
 
 ## 技能列表
 
@@ -29,7 +38,7 @@ cp -r ai-doc-skills/final-solution-only ~/.agents/skills/
 # 其余技能同理
 ```
 
-只想在单个项目生效，就放到该项目的 `.agents/skills/` 目录下。
+只想在单个项目生效，就放到该项目的 `.agents/skills/` 目录下。使用其他工具时，把示例中的 `.agents/skills` 替换为该工具的技能目录（见上文列表）即可。
 
 技能在新会话启动时被发现并按 `description` 自动触发；也可以显式调用，例如 ZCode 中使用 `/skill final-solution-only` 强制加载。
 
