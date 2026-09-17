@@ -48,4 +48,4 @@ cp -r ai-doc-skills/final-solution-only ~/.agents/skills/
 
 ## License
 
-未附带开源协议。如需引用或复用请自行联系作者，或告知我补充 MIT 等协议。
+[MIT](LICENSE)。可自由复制、修改、分发与复用，请保留版权与许可声明。
