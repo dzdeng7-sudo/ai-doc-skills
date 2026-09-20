@@ -20,8 +20,9 @@
 | [no-marketing-tone](no-marketing-tone/) | 文风直陈、克制，标题用名词短语直接说明内容 | "数据怎么流，一句话看懂""一文读懂""看完这篇就够了"式口号标题；<br>"本方案回答一件事"式故弄玄虚开场；<br>"动作归属：谁在哪里做什么"式术语后附大白话注释；<br>"强大""赋能""轻松搞定"等营销词与感叹号、emoji 堆砌 |
 | [stay-on-topic](stay-on-topic/) | 只写用户点名的主题、章节与技术点 | 让它写清结算改造方案，它非要在里面提一嘴商户 KYC 进件；<br>自行添加"未来规划""扩展方向"等没要求的章节；<br>编造"上线前需财务确认""待评审"这类它无从知道的前置条件与待确认事项 |
 | [narrative-flow](narrative-flow/) | 结构编排：叙事线连贯、对比相邻 | 做"当前 vs 改造后"对比时，它把改造后动作说明插在两张时序图中间，打断了对比叙事；<br>对图表的解释不紧跟图表，读者要来回翻看 |
+| [reverse-prd](reverse-prd/) | 读现有系统代码，按内置 PRD 标准模板反向整理 PRD | 新产品要熟悉系统，靠人工截图找开发逐个确认功能太低效；<br>老功能没有 PRD，需要按标准模板补齐用于新人交接 |
 
-五个技能各管一件事：`final-solution-only` 管"写了什么内容"，`preserve-user-edits` 管"怎么改文件"，`no-marketing-tone` 管"用什么语气"，`stay-on-topic` 管"写到什么范围"，`narrative-flow` 管"按什么顺序讲"。分开定义是为了让各自触发更可靠，它们可以同时生效。
+六个技能各管一件事：`final-solution-only` 管"写了什么内容"，`preserve-user-edits` 管"怎么改文件"，`no-marketing-tone` 管"用什么语气"，`stay-on-topic` 管"写到什么范围"，`narrative-flow` 管"按什么顺序讲"，`reverse-prd` 管"怎么从现有系统反向产出 PRD"。分开定义是为了让各自触发更可靠，它们可以同时生效。
 
 ## 安装
 
