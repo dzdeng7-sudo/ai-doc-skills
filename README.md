@@ -23,8 +23,6 @@
 
 五个技能各管一件事：`final-solution-only` 管"写了什么内容"，`preserve-user-edits` 管"怎么改文件"，`no-marketing-tone` 管"用什么语气"，`stay-on-topic` 管"写到什么范围"，`narrative-flow` 管"按什么顺序讲"。分开定义是为了让各自触发更可靠，它们可以同时生效。
 
-> 另有一个 [reverse-prd](https://github.com/dzdeng7-sudo/reverse-prd) 技能——读取现有系统代码、按标准模板反向梳理 PRD。它属于 PRD 产出类技能，不属于文档写作规范，因此单独成仓库维护。
-
 ## 安装
 
 把需要的技能文件夹复制到用户级技能目录（对所有项目生效）：
