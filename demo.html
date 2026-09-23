@@ -45,10 +45,6 @@
   .output .content { font-size: 14.5px; }
   .output .content h4 { font-size: 14.5px; margin: 6px 0 2px; }
   .output .content p { margin: 4px 0; }
-  .output .content code {
-    font-family: Consolas, Monaco, monospace; font-size: 13px;
-    background: rgba(0,0,0,0.06); border-radius: 3px; padding: 1px 5px;
-  }
   mark { background: #ffe8a3; padding: 0 3px; border-radius: 3px; }
 
   .why {
@@ -63,7 +59,6 @@
   }
   .fixed .label { font-size: 13px; font-weight: 600; color: #196f2d; margin-bottom: 6px; }
   .fixed .content { font-size: 14.5px; }
-  .fixed .content h4 { font-size: 14.5px; margin: 6px 0 2px; }
   .fixed .content p { margin: 4px 0; }
   .fixed .tail { font-size: 13.5px; color: #5a6b7b; margin-top: 8px; }
 
@@ -76,31 +71,31 @@
 
 <header>
   <h1>文档写作规范技能 · 效果演示</h1>
-  <p>这套技能用来约束 AI 撰写和修改文档的行为。下面每一段都是一个真实发生过的场景：AI 没有约束时写了什么、问题出在哪、加了约束之后怎么写。不需要技术背景也能看懂。</p>
+  <p>这套技能用来约束 AI 撰写和修改文档的行为。下面每一段都是一个真实发生过的场景：AI 没有约束时写了什么、问题出在哪、加了约束之后怎么写。例子全部来自日常办公文档，不需要任何技术背景。</p>
 </header>
 
 <section>
-  <div class="skill-line"><code>final-solution-only</code>删掉的方案，别再提</div>
+  <div class="skill-line"><code>final-solution-only</code>删掉的安排，别再提</div>
 
   <div class="story">
-    <div class="step"><span class="n">1</span><span class="t">AI 帮你写了一份系统设计文档，里面用"配置表"（一张存放可调参数的数据表）来管理参数。</span></div>
-    <div class="step"><span class="n">2</span><span class="t">后来方案改了：参数不放配置表了，改用另一种保存方式（环境变量）。你让 AI 更新文档。</span></div>
-    <div class="step"><span class="n">3</span><span class="t">AI 更新后的文档里，出现了这句话：</span></div>
+    <div class="step"><span class="n">1</span><span class="t">AI 帮你写了一份年会方案：场地定在酒店宴会厅，安排晚宴和抽奖。</span></div>
+    <div class="step"><span class="n">2</span><span class="t">后来预算缩减，改在公司多功能厅办茶话会。你让 AI 更新方案。</span></div>
+    <div class="step"><span class="n">3</span><span class="t">AI 更新后的方案里，出现了这句话：</span></div>
   </div>
 
   <div class="output">
     <div class="label">AI 写出的内容</div>
-    <div class="content"><p>本设计<mark>不使用配置表</mark>，相关参数通过环境变量 <code>APP_CONFIG</code> 注入。</p></div>
+    <div class="content"><p>本次年会<mark>不在酒店举办</mark>，<mark>不设晚宴环节</mark>，改为公司多功能厅茶话会。</p></div>
   </div>
 
   <div class="why">
-    <span class="label">问题出在哪：</span>这份文档以后的读者，只需要知道"参数放在环境变量里"就够了。"曾经有过配置表"对他们没有任何用处——特意写一句"不使用配置表"，读者反而会犯嘀咕：为什么特意说这个？是不是有什么坑？文档应该当作"配置表从来没有存在过"来写。
+    <span class="label">问题出在哪：</span>读方案的人只需要知道"今年在哪办、办成什么样"。"不在酒店、不设晚宴"把他们从没听过的事否定了一遍，反而让人嘀咕：是不是欠了大家一顿晚宴？方案应该当作"酒店那版从来没有存在过"来写。
   </div>
 
   <div class="fixed">
     <div class="label">加载技能后，AI 写出的内容</div>
-    <div class="content"><p>相关参数通过环境变量 <code>APP_CONFIG</code> 注入，服务启动时统一加载并生效。</p></div>
-    <div class="tail">原来写配置表的那一节、目录里指向它的链接，也一并删干净。</div>
+    <div class="content"><p>年会定于公司多功能厅举行，以部门为单位安排茶话与抽奖，预计三个小时。</p></div>
+    <div class="tail">原来酒店场地、晚宴餐饮的内容，连同目录里指向它们的条目，一并删干净。</div>
   </div>
 </section>
 
@@ -108,58 +103,58 @@
   <div class="skill-line"><code>preserve-user-edits</code>你手动改过的内容，不能被它写回去</div>
 
   <div class="story">
-    <div class="step"><span class="n">1</span><span class="t">AI 生成的设计文档里写着"超时时间 30 秒""重试次数上限 5"。</span></div>
-    <div class="step"><span class="n">2</span><span class="t">你检查后发现数值不对，手动改成"60 秒""3"，保存了文件。</span></div>
-    <div class="step"><span class="n">3</span><span class="t">过了几天，你让 AI"在文档开头补一句：数据每天自动备份"。它改完之后——</span></div>
+    <div class="step"><span class="n">1</span><span class="t">AI 生成的员工手册里写着"试用期 6 个月""差旅报销 30 天到账"。</span></div>
+    <div class="step"><span class="n">2</span><span class="t">HR 检查后发现与公司制度不符，手动改成"试用期 3 个月""15 天到账"，保存了文件。</span></div>
+    <div class="step"><span class="n">3</span><span class="t">过了几天，HR 让 AI"在手册开头加一句欢迎新同事的话"。改完之后——</span></div>
   </div>
 
   <div class="output">
     <div class="label">AI 写出的内容</div>
-    <div class="content"><p>开头补上了备份说明。但参数部分，被它写回了 <mark>30 秒</mark>和<mark>上限 5</mark>。</p></div>
+    <div class="content"><p>开头加上了欢迎语。但翻到制度页，被写回了<mark>试用期 6 个月</mark>、<mark>30 天到账</mark>。</p></div>
   </div>
 
   <div class="why">
-    <span class="label">问题出在哪：</span>AI 记得"自己当初写的是 30 秒"，却不知道你后来手动改过文件。它按记忆重写一遍，你的修改就被悄悄盖掉了——而且文档看起来仍然"没问题"，你可能很久都发现不了。
+    <span class="label">问题出在哪：</span>AI 记得"自己当初写的是 6 个月"，却不知道 HR 后来手动改过文件。它按记忆重写，修改就被悄悄盖掉——而且文档看起来仍然"没问题"，等发现时手册可能已经发给新员工了。
   </div>
 
   <div class="fixed">
     <div class="label">加载技能后，AI 的做法</div>
-    <div class="content"><p>动手前先重新读一遍文件的最新内容，发现"60 秒、3"和它记忆中的不一样——这是你的手动修改，原样保留；然后只在开头补上备份那句话，其他一个字不动。</p></div>
-    <div class="tail">改完还会告诉你："检测到文档里有手动修改，已保留。"</div>
+    <div class="content"><p>动手前先重新读一遍文件的最新内容，发现"3 个月、15 天"和它记忆中的不一样——这是人的手动修改，原样保留；然后只在开头加欢迎语，其他一个字不动。</p></div>
+    <div class="tail">改完还会说一句："检测到文档里有手动修改，已保留。"</div>
   </div>
 </section>
 
 <section>
-  <div class="skill-line"><code>no-marketing-tone</code>技术文档，不要营销腔</div>
+  <div class="skill-line"><code>no-marketing-tone</code>文档不要营销腔</div>
 
   <div class="story">
-    <div class="step"><span class="n">1</span><span class="t">你让 AI 写一份数据平台的介绍文档。</span></div>
+    <div class="step"><span class="n">1</span><span class="t">你让 AI 写一份新员工入职指南。</span></div>
     <div class="step"><span class="n">2</span><span class="t">它交上来的开头是这样的：</span></div>
   </div>
 
   <div class="output">
     <div class="label">AI 写出的内容</div>
     <div class="content">
-      <h4>数据怎么流，一句话看懂</h4>
-      <p>数据流转超简单，从此告别混乱！</p>
-      <h4>本方案回答一件事：钱怎么算清楚</h4>
-      <h4>动作归属：谁在哪里做什么</h4>
+      <h4>入职那些事，一篇看懂</h4>
+      <p>手续超简单，从此告别迷茫！</p>
+      <h4>考勤规则：谁在几点该做什么</h4>
+      <h4>报销指南：钱怎么才能到手</h4>
     </div>
   </div>
 
   <div class="why">
-    <span class="label">问题出在哪：</span>这些标题像营销号：先卖关子，再喊口号。看文档的是同事，不是被"吸引眼球"的游客——他们需要一眼知道这一节讲什么。"动作归属"后面跟一句"谁在哪里做什么"，相当于给大学生课本标拼音，反而显得不专业。
+    <span class="label">问题出在哪：</span>这些标题像广告：先卖关子，再喊口号。看指南的是新同事，他们要的是"一眼找到答案"，不是"被吸引眼球"。"考勤规则"后面跟一句"谁在几点该做什么"，相当于给大学生课本标拼音，反而显得不专业。
   </div>
 
   <div class="fixed">
     <div class="label">加载技能后，AI 写出的内容</div>
     <div class="content">
-      <h4>数据流向</h4>
-      <p>数据每天从各业务系统汇总到统一的数据仓库，第二天生成报表。</p>
-      <h4>动作归属</h4>
-      <p>每个操作记录执行人（系统自动或人工）和所属环节，出了问题能找到人。</p>
+      <h4>入职流程</h4>
+      <p>入职共三步：签合同、办工牌、开通系统账号，通常半天完成。</p>
+      <h4>考勤规则</h4>
+      <p>工作日 9:00 至 18:00，午休一小时；请假需提前一天在系统提交。</p>
     </div>
-    <div class="tail">标题直接点明内容，定义用一句准确的话，没有感叹号和口号。</div>
+    <div class="tail">标题直接点明内容；需要解释的，用一句准确的话说清，没有感叹号和口号。</div>
   </div>
 </section>
 
@@ -167,25 +162,25 @@
   <div class="skill-line"><code>stay-on-topic</code>没让写的，别往里塞</div>
 
   <div class="story">
-    <div class="step"><span class="n">1</span><span class="t">你让 AI 写一份"收款系统改造方案"，背景里提了一句"我们给商户提供收款服务"。</span></div>
+    <div class="step"><span class="n">1</span><span class="t">你让 AI 写一份"部门团建方案"，只提了一句"今年部门业绩不错"。</span></div>
     <div class="step"><span class="n">2</span><span class="t">它交上来的方案里，出现了这两句：</span></div>
   </div>
 
   <div class="output">
     <div class="label">AI 写出的内容</div>
     <div class="content">
-      <p>本方案与商户 KYC 进件模块（商家入驻时提交资料审核的环节）联动，进件完成后自动触发首期结算。</p>
-      <p>上线前置：该口径与现行口径不同，<mark>上线前需财务确认</mark>。</p>
+      <p>本次活动表现<mark>将纳入年度考核参考</mark>。</p>
+      <p>活动前<mark>需报备行政部与财务部联合审批</mark>。</p>
     </div>
   </div>
 
   <div class="why">
-    <span class="label">问题出在哪：</span>"商户入驻审核"跟这份改造方案没关系，你一个字没提；"需财务确认"更是它编的——你们公司有没有这个流程，它根本不可能知道。评审的人看到这些会拿去追问，平白多出一堆要解释的事。
+    <span class="label">问题出在哪：</span>"纳入考核"你一个字没提——这话传出去，报名的同事能吓跑一半；"需两个部门联合审批"更是它编的，公司有没有这个流程，它根本不可能知道。方案发出去，大家会拿着这些去追问，平白多出一堆要解释的事。
   </div>
 
   <div class="fixed">
     <div class="label">加载技能后，AI 的做法</div>
-    <div class="content"><p>方案只写你点名的部分。AI 觉得少了什么，会在聊天里问你"要不要补一节"，由你决定，不自己往文档里塞。</p></div>
+    <div class="content"><p>方案只写你点名的部分：时间地点、活动安排、预算。AI 觉得少了什么，会在聊天里问"要不要补一节"，由你决定，不自己往文档里塞。</p></div>
   </div>
 </section>
 
@@ -193,22 +188,22 @@
   <div class="skill-line"><code>narrative-flow</code>两张对比图中间，别插别的内容</div>
 
   <div class="story">
-    <div class="step"><span class="n">1</span><span class="t">汇报页要展示一个系统改造：改造前的流程一张图，改造后的流程一张图，另外还有一段"新增功能说明"。</span></div>
+    <div class="step"><span class="n">1</span><span class="t">汇报页要展示办公室搬迁：搬迁前的工位布局一张图，搬迁后一张图，另有一段新工位的使用说明。</span></div>
     <div class="step"><span class="n">2</span><span class="t">AI 排出来的页面顺序是这样的：</span></div>
   </div>
 
   <div class="output">
     <div class="label">AI 排出的顺序</div>
-    <div class="content"><p>总体架构 → 改造前流程图 → <mark>新增功能说明（一大段）</mark> → 改造后流程图</p></div>
+    <div class="content"><p>公司介绍 → 搬迁前布局图 → <mark>新工位使用说明（一大段）</mark> → 搬迁后布局图</p></div>
   </div>
 
   <div class="why">
-    <span class="label">问题出在哪：</span>看"改造前"的时候，读者正等着看"改造后"来对比；中间隔了一大段说明，等读完，前面那张图已经忘得差不多了，只能翻回去再看一遍。两张图挨着放，对比才成立。
+    <span class="label">问题出在哪：</span>看"搬迁前"的时候，读者正等着看"搬迁后"来对比；中间隔了一大段说明，读完，前面那张图忘得差不多了，只能翻回去再看一遍。两张图挨着放，对比才成立。
   </div>
 
   <div class="fixed">
     <div class="label">加载技能后，AI 排出的顺序</div>
-    <div class="content"><p>总体架构 → 改造前流程图 → 改造后流程图 → 新增功能说明</p></div>
+    <div class="content"><p>公司介绍 → 搬迁前布局图 → 搬迁后布局图 → 新工位使用说明</p></div>
     <div class="tail">先把两张图挨着看完、形成对比，再讲细节。</div>
   </div>
 </section>
