@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文档写作规范技能 · 效果演示</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #f2f4f8;
+    color: #24292f;
+    line-height: 1.75;
+    padding: 40px 16px;
+  }
+  .page { max-width: 860px; margin: 0 auto; }
+  header { border-bottom: 2px solid #1f3a5f; padding-bottom: 20px; margin-bottom: 32px; }
+  header h1 { font-size: 24px; color: #16232f; }
+  header p { margin-top: 8px; font-size: 14px; color: #5a6b7b; }
+  header p code { background: #e8edf3; border-radius: 4px; padding: 1px 6px; font-size: 13px; }
+
+  section { background: #ffffff; border: 1px solid #dde4ec; border-radius: 10px; padding: 26px 30px 30px; margin-bottom: 26px; }
+  .skill-name { font-size: 17px; font-weight: 600; color: #1f3a5f; }
+  .skill-name code { font-size: 14px; background: #eef3fa; color: #1f3a5f; border-radius: 4px; padding: 2px 8px; margin-right: 10px; }
+  .skill-desc { margin: 8px 0 14px; font-size: 14px; color: #4a5a69; }
+  .scenario {
+    font-size: 14px; color: #333;
+    background: #f6f8fa; border: 1px solid #e2e8f0; border-radius: 6px;
+    padding: 10px 14px; margin-bottom: 16px;
+  }
+  .scenario strong { color: #1f3a5f; }
+
+  .block { border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; border: 1px solid; }
+  .block:last-child { margin-bottom: 0; }
+  .block .label { font-size: 13px; font-weight: 600; letter-spacing: 1px; margin-bottom: 8px; }
+  .before { border-color: #eecdc9; border-left: 4px solid #c0392b; background: #fdf7f6; }
+  .before .label { color: #a93226; }
+  .after { border-color: #c9dfc9; border-left: 4px solid #1e7e34; background: #f6fbf6; }
+  .after .label { color: #196f2d; }
+  .block .content { font-size: 14px; }
+  .block .content p { margin: 4px 0; }
+  .block .content h4 { font-size: 14.5px; margin: 8px 0 4px; color: #16232f; }
+  .block .content code { font-family: Consolas, Monaco, "Courier New", monospace; font-size: 13px; background: rgba(0,0,0,0.05); border-radius: 3px; padding: 1px 5px; }
+  .strike { color: #a93226; text-decoration: line-through; }
+  .mark { color: #a93226; font-weight: 600; }
+  .note { font-size: 12.5px; color: #7a8694; margin-top: 6px; }
+
+  footer { text-align: center; font-size: 13px; color: #8a94a0; margin-top: 30px; }
+  footer a { color: #1f4e8c; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <h1>文档写作规范技能 · 效果演示</h1>
+  <p>五个技能约束 AI 撰写与修改文档的行为。下面每组对比来自真实使用中反复出现的问题：左侧是未加载技能时的典型输出，右侧是加载后的输出。技能安装方式见 <code>README.md</code>。</p>
+</header>
+
+<section>
+  <div class="skill-name"><code>final-solution-only</code>正文只写最终采用的方案</div>
+  <div class="scenario"><strong>场景：</strong>方案原先用数据库配置表管理参数，用户决定改用环境变量，让 AI 更新文档。</div>
+  <div class="block before">
+    <div class="label">未加载技能的典型输出</div>
+    <div class="content">
+      <p>本设计<span class="mark">不使用配置表</span>，相关参数通过环境变量 <code>APP_CONFIG</code> 注入，服务启动时加载。<span class="mark">已移除原配置表方案</span>，刷新接口不再需要。</p>
+      <p class="note">方案被删了，但它非要留一句否定被删方案的描述；被删内容还在目录和交叉引用里留残迹。</p>
+    </div>
+  </div>
+  <div class="block after">
+    <div class="label">加载技能后的输出</div>
+    <div class="content">
+      <p>相关参数通过环境变量 <code>APP_CONFIG</code> 注入，服务启动时统一加载并生效。</p>
+      <p class="note">配置表相关章节、引用同步清理；文档读起来像"配置表从未存在过"。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="skill-name"><code>preserve-user-edits</code>修改文档以磁盘当前内容为准</div>
+  <div class="scenario"><strong>场景：</strong>AI 生成的文档写着"超时 30s、maxRetryCount=5"；用户手动改成"60s、max_retry_times=5"。之后用户让 AI"在概述里补充一句支持断点续传"。</div>
+  <div class="block before">
+    <div class="label">未加载技能的典型输出</div>
+    <div class="content">
+      <p>按记忆中的版本重写全文：概述加了断点续传，但核心参数章节写回了 <span class="mark">30s</span> 和 <span class="mark">maxRetryCount=5</span>——用户的手动修正被静默覆盖。</p>
+    </div>
+  </div>
+  <div class="block after">
+    <div class="label">加载技能后的输出</div>
+    <div class="content">
+      <p>先读取磁盘当前内容，仅在概述节追加一句；其余内容逐字保留（60s、max_retry_times=5 原样还在），并在回复中提示"检测到手动修改，已保留"。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="skill-name"><code>no-marketing-tone</code>文风直陈，不要口号</div>
+  <div class="scenario"><strong>场景：</strong>让 AI 写数据平台介绍文档和汇报页。</div>
+  <div class="block before">
+    <div class="label">未加载技能的典型输出</div>
+    <div class="content">
+      <h4>数据怎么流，一句话看懂</h4>
+      <p>数据流转超简单，从此告别混乱！</p>
+      <h4>本方案回答一件事：钱怎么算清楚</h4>
+      <p>动作归属：谁在哪里做什么。配置超简单，小白也能三分钟上手！</p>
+      <p class="note">口号式标题、故弄玄虚开场、术语后附大白话注释、营销词与感叹号，全部混进技术文档。</p>
+    </div>
+  </div>
+  <div class="block after">
+    <div class="label">加载技能后的输出</div>
+    <div class="content">
+      <h4>数据流向</h4>
+      <p>数据经采集服务进入 Kafka，由 Flink 消费后写入数仓 ODS 层，T+1 供报表使用。</p>
+      <h4>动作归属</h4>
+      <p>每个流转动作记录操作方（系统自动或人工操作）与所属环节，用于定位问题与界定责任。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="skill-name"><code>stay-on-topic</code>只写用户点名的主题</div>
+  <div class="scenario"><strong>场景：</strong>让 AI 写清结算改造方案，背景只提了一句"我们是给商户提供收款服务的平台"。</div>
+  <div class="block before">
+    <div class="label">未加载技能的典型输出</div>
+    <div class="content">
+      <p>……本方案与<span class="mark">商户 KYC 进件模块联动</span>，进件完成后自动触发首期结算。<span class="mark">上线前置：需财务确认</span>。未来可扩展对账自动化能力……</p>
+      <p class="note">用户没提 KYC，也没提任何确认流程——进件、前置条件、未来规划全是它自己加的。</p>
+    </div>
+  </div>
+  <div class="block after">
+    <div class="label">加载技能后的输出</div>
+    <div class="content">
+      <p>文档只覆盖用户点名的部分（改造背景、清分规则、结算与出款、对账）；AI 认为缺的内容在对话里建议（"要不要补一节？"），不擅自写进文档。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="skill-name"><code>narrative-flow</code>结构编排：对比相邻、叙事不断</div>
+  <div class="scenario"><strong>场景：</strong>汇报页要做"当前 vs 改造后"流程对比，含两张时序图和改造后新增动作说明。</div>
+  <div class="block before">
+    <div class="label">未加载技能的典型输出</div>
+    <div class="content">
+      <p>总体架构 → 当前流程（时序图）→ <span class="mark">【中间插入一大段改造后动作说明】</span> → 改造后流程（时序图）</p>
+      <p class="note">两张对比图之间被说明隔开，读者刚建立的"当前"上下文到"改造后"时已经断了。</p>
+    </div>
+  </div>
+  <div class="block after">
+    <div class="label">加载技能后的输出</div>
+    <div class="content">
+      <p>总体架构 → 当前流程（时序图）→ 改造后流程（时序图）→ 改造后新增动作说明</p>
+      <p class="note">两张图背靠背相邻，对比小结和动作说明放在对比完成之后。</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  技能与安装说明见 <a href="https://github.com/dzdeng7-sudo/ai-doc-skills">ai-doc-skills 仓库</a>
+</footer>
+
+</div>
+</body>
+</html>
